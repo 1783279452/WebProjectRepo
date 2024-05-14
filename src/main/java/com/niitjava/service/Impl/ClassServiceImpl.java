@@ -5,7 +5,6 @@ import com.niitjava.mapper.ClassMapper;
 import com.niitjava.service.ClassService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -22,9 +21,9 @@ public class ClassServiceImpl implements ClassService {
 
     @Override//添加班级
     public void addClass(Class classobject) {
-        classobject.setCreateTime(LocalDateTime.now());//因为新建的班级无新建日期和更新日期，故此处先设置再往mapper传递
+        classobject.setCreateTime(LocalDateTime.now());
         classobject.setUpdateTime(LocalDateTime.now());
-        classMapper.add(classobject);
+        classMapper.add(classobject);//因为新建的班级无新建日期和更新日期，故此处先设置再往mapper传递
     }
 
     @Override//删除班级

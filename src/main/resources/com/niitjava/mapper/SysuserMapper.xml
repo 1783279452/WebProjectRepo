@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--        namespace后跟要接管的接口引用地址-->
+<mapper namespace="com.niitjava.mapper.SysuserMapper">
+<!--    跟新员工，动态sql
+    test标签：用来判断传进来的参数是否符合
+    ps：
+    =左边：指数据库指定字段要改成什么？
+    =右边：指要改成上级传下来的bean类的xxx属性名的的值
+    ！short类型不可能为空串，所有不用判断！= ‘’
+    -->
+<update id="update" >
+    update sysuser
+    <set>
+        <if test="username != null and username != '' ">
+            username = #{username},
+        </if>
+        <if test="password != null and password != '' ">
+            password = #{password},
+        </if>
+        <if test="name != null and name !='' ">
+            name = #{name},
+        </if>
+        <if test="image != null and image !='' ">
+            image = #{image},
+        </if>
+        <if test="gender !=null">
+            gender = #{gender},
+        </if>
+        <if test="status != null">
+            status = #{status},
+        </if>
+        <if test="entrydate != null">
+            entrydate = #{entrydate},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime}
+        </if>
+    </set>
+    where id = #{id}
+</update>
+    <!--条件查询、分页展示，resultType后跟查询到的信息进行封装的bean对象类
+    判断：姓名、性别、职位、入职时间（始末）-->
+    <select id="getQueryPage" resultType="com.niitjava.Bean.Sysuser">
+        select * from sysuser
+            <where>
+                <if test="name != null and name != '' ">
+                    name like concat('%' , #{name} , '%')
+                </if>
+                <if test="gender != null">
+                    and gender = #{gender}
+                </if>
+                <if test="status != null">
+                    and status = #{status}
+                </if>
+                <if test="begin != null and end != null">
+                    and entrydate between #{begin} and #{end}
+                </if>
+                order by update_time desc
+            </where>
+
+    </select>
+</mapper>
