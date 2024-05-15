@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@RestController
+@RestController//控制反转的注解
 @Slf4j
 public class SysuserController {
 

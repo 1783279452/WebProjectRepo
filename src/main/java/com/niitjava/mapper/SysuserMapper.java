@@ -33,4 +33,8 @@ public interface SysuserMapper {
 
     /*条件查询，分页展示--动态sql*/
     List<Sysuser> getQueryPage(String name, Short gender, Short status, LocalDateTime begin, LocalDateTime end);
+
+
+    @Select("select * from sysuser where username = #{username} and password = #{password}")//登录 查询账号密码是否正确
+    Sysuser login(Sysuser sysuser);
 }

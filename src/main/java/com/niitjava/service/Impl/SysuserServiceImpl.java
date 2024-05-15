@@ -2,7 +2,6 @@ package com.niitjava.service.Impl;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.niitjava.Bean.Class;
 import com.niitjava.Bean.PageBean;
 import com.niitjava.Bean.Sysuser;
 import com.niitjava.mapper.SysuserMapper;
@@ -66,6 +65,11 @@ public class SysuserServiceImpl implements SysuserService {
         Page<Sysuser> page1 = (Page<Sysuser>) sysusers;
         PageBean pageBean = new PageBean(page1.getTotal(),page1.getResult());
         return pageBean;
+    }
+
+    @Override//登录校验
+    public Sysuser login(Sysuser sysuser) {
+        return sysuserMapper.login(sysuser);
     }
 
 

@@ -23,4 +23,6 @@ public interface SysuserService {
     PageBean getPage(Integer page, Integer pageSize);
 
     PageBean getQueryPage(Integer page, Integer pageSize, String name, Short gender, Short status, LocalDateTime begin, LocalDateTime end);
+
+    Sysuser login(Sysuser sysuser);
 }
