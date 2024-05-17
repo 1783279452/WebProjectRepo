@@ -6,6 +6,7 @@ import com.niitjava.service.SysuserService;
 import com.niitjava.utils.JwtUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.DigestUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,9 +21,15 @@ public class LoginController {
     @Autowired
     private SysuserService sysuserService;
 
+
     @PostMapping("/login")//接收前端json格式账号密码
     public Result login(@RequestBody Sysuser sysuser){//前端登录输入账号密码封装进用户类传递进来
         log.info("控制-员工登录：{}",sysuser);
+        /*对前端传来的密码进行md5加密 再查询*/
+        String password = sysuser.getPassword();
+        password = DigestUtils.md5DigestAsHex(password.getBytes());
+        sysuser.setPassword(password);
+
         Sysuser sysuser1 = sysuserService.login(sysuser);//查询
 
         /*生成jwt令牌，并返回前端（如果调用mapper方法判断账号密码存在 登录成功的话）*/

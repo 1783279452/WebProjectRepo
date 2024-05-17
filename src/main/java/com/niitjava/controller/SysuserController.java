@@ -3,6 +3,7 @@ package com.niitjava.controller;
 import com.niitjava.Bean.PageBean;
 import com.niitjava.Bean.Result;
 import com.niitjava.Bean.Sysuser;
+import com.niitjava.aop.Log;
 import com.niitjava.service.SysuserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,7 @@ public class SysuserController {
 
     @Autowired
     private SysuserService sysuserService;
+
 
     @GetMapping("/sysuser")
     public Result get(){//查询全部系统人员信息
@@ -54,6 +56,7 @@ public class SysuserController {
         return Result.success(sysuser);
     }
 
+    @Log
     @GetMapping("/sysuserpage")//分页查询，接收开始页码、每页记录数量，返回总记录数、每页多项员工数据
     public Result getPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer pageSize){//接收前端提供数据
         /*page为分页查询页码，pagesiz为每页记录的数量。@RequestParam用于给形参提供默认值*/

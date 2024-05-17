@@ -13,8 +13,8 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
     public Result hand(Exception e){
         e.printStackTrace();
-        log.info("——————捕获到全局异常！——————");
-        return Result.error("失败，操作出现异常");
+        log.info("——————捕获到全局异常——————");
+        return Result.error("失败，操作出现异常，请联系管理员");
 
     }
 }

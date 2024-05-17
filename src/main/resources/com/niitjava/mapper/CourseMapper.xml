@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--        namespace后跟要接管的接口引用地址-->
+<mapper namespace="com.niitjava.mapper.CourseMapper">
+
+    <update id="updateCourse" >
+        update course
+        <set>
+            <if test="courseName != null and courseName != '' ">
+                course_name = #{courseName},
+            </if>
+            <if test="term != null and term != '' ">
+                term = #{term}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+</mapper>
