@@ -6,6 +6,8 @@ import com.niitjava.service.CourseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CourseServiceImpl implements CourseService {
 
@@ -24,6 +26,11 @@ public class CourseServiceImpl implements CourseService {
     @Override
     public void updateCourse(Course course) {//动态更新课程信息
         courseMapper.updateCourse(course);
+    }
+
+    @Override
+    public List<Course> getCourse() {//查询全部课程
+        return courseMapper.getCourse();
     }
 
 

@@ -31,7 +31,7 @@ public interface SysuserMapper {
     List<Sysuser> getPage();
 
 
-    /*条件查询，分页展示--动态sql*/
+//    条件查询，分页展示--动态sql
     List<Sysuser> getQueryPage(String name, Short gender, Short status, LocalDateTime begin, LocalDateTime end);
 
 

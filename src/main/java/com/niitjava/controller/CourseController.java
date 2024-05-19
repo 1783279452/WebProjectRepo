@@ -9,6 +9,8 @@ import org.apache.ibatis.annotations.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @Slf4j
 public class CourseController {
@@ -34,6 +36,13 @@ public class CourseController {
         log.info("执行控制-update-更新课程");
         courseService.updateCourse(course);
         return Result.success();
+    }
+
+    @GetMapping("/course")
+    private Result get(){//查询全部的课程信息
+        log.info("执行控制-get-查询全部课程");
+        List<Course> list = courseService.getCourse();
+        return Result.success(list);
     }
 
 

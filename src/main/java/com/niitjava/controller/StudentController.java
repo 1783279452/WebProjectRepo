@@ -1,12 +1,15 @@
 package com.niitjava.controller;
 
+import com.niitjava.Bean.PageBean;
 import com.niitjava.Bean.Result;
 import com.niitjava.Bean.Student;
 import com.niitjava.service.StudentService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -41,5 +44,28 @@ public class StudentController {
         log.info("执行控制-getById方法-通过id查询学生");
         Student student = studentService.getStudentById(id);
         return Result.success(student);
+    }
+
+    @GetMapping("/stupage")//分页查询（返回的包括总记录数）
+    public Result getPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer pageSize){
+        log.info("控制-getPage-分页查询 数据：{},{}",page,pageSize);
+        PageBean pageBean = studentService.getPage(page,pageSize);
+        return Result.success(pageBean);
+    }
+
+    @GetMapping("/stuquepage")//条件查询--分页返回
+    public Result getQueryPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer pageSize,
+                               String sn, String name, Short gender, Short status, String className, Integer classId,
+                               @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDateTime begin, @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDateTime end){
+        log.info("控制-getQueryPage-条件 条件查询 分页返回");
+        PageBean pageBean = studentService.getQueryPage(page,pageSize,sn,name,gender,status,className,classId,begin,end);
+        return Result.success(pageBean);
+    }
+
+    @PutMapping("/stu")//动态更新学生信息
+    public Result update(@RequestBody Student student){
+        log.info("执行控制-update方法-修改学生");
+        studentService.updateSysuser(student);
+        return Result.success();
     }
 }

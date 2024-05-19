@@ -26,10 +26,10 @@
         <if test="image != null and image !='' ">
             image = #{image},
         </if>
-        <if test="gender !=null">
+        <if test="gender !=null and gender !=''">
             gender = #{gender},
         </if>
-        <if test="status != null">
+        <if test="status != null and status !=''">
             status = #{status},
         </if>
         <if test="entrydate != null">
@@ -58,8 +58,7 @@
                 <if test="begin != null and end != null">
                     and entrydate between #{begin} and #{end}
                 </if>
-                order by update_time desc
             </where>
-
+        order by update_time desc
     </select>
 </mapper>

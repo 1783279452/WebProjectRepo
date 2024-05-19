@@ -40,7 +40,6 @@ public class SysuserServiceImpl implements SysuserService {
     public void updateSysuser(Sysuser sysuser) {
         sysuser.setUpdateTime(LocalDateTime.now());
         sysuserMapper.update(sysuser);
-
     }
 
     @Override//根据ID查询员工
@@ -58,7 +57,7 @@ public class SysuserServiceImpl implements SysuserService {
         return pageBean;
     }
 
-    @Override//条件查询-分页显示     未完成
+    @Override//条件查询-分页显示
     public PageBean getQueryPage(Integer page, Integer pageSize, String name, Short gender, Short status, LocalDateTime begin, LocalDateTime end) {
         PageHelper.startPage(page,pageSize);
         List<Sysuser> sysusers = sysuserMapper.getQueryPage(name,gender,status,begin,end);

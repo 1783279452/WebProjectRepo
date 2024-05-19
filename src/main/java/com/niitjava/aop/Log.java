@@ -7,5 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)//指定当前注解什么时候有效，此处设置为运行时有效
 @Target(ElementType.METHOD)//指定当前注解作用在何处，此处为方法上method
-public @interface Log {
+public @interface Log {//controller层异常由log.info记录，service异常由@Log数据库记录
 }

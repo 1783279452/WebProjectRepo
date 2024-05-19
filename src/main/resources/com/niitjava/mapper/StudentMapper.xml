@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--        namespace后跟要接管的接口引用地址-->
+<mapper namespace="com.niitjava.mapper.StudentMapper">
+
+    <!--条件查询_分页返回-->
+    <select id="getQueryPage" resultType="com.niitjava.Bean.Student">
+        select id, sn, name, image, gender, status, class_name className, class_id classId, entrydate, create_time createTime, update_time updateTime from student
+        <where>
+            <if test="sn != null and sn != '' ">
+                sn = #{sn}
+            </if>
+            <if test="name != null and name != '' ">
+                and name like concat('%' , #{name} , '%')
+            </if>
+            <if test="gender != null">
+                and gender = #{gender}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="className != null and className != '' ">
+                and class_name = #{className}
+            </if>
+            <if test="classId != null">
+                and class_id = #{classId}
+            </if>
+            <if test="begin != null and end != null">
+                and entrydate between #{begin} and #{end}
+            </if>
+        </where>
+        order by update_time desc
+    </select>
+
+    <!--修改学生信息，动态sql-->
+    <update id="update" >
+        update student
+        <set>
+            <if test="sn != null and sn != '' ">
+                sn = #{sn},
+            </if>
+            <if test="name != null and name != '' ">
+                name = #{name},
+            </if>
+            <if test="image != null and image != '' ">
+                image = #{image},
+            </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status},
+            </if>
+            <if test="className != null and className != '' ">
+                class_name = #{className},
+            </if>
+            <if test="classId != null">
+                class_id = #{classId},
+            </if>
+            <if test="entrydate != null">
+                entrydate = #{entrydate},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>

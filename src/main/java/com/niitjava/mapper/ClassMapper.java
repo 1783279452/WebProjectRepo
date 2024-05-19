@@ -23,4 +23,9 @@ public interface ClassMapper {
     //删除班级
     @Delete("delete from classinfo where id = #{id}")
     void deleteById(Integer id);
+
+
+    //分页查询
+    @Select("select * from classinfo")
+    List<Class> getClassPage();
 }

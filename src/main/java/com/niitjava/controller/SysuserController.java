@@ -44,7 +44,7 @@ public class SysuserController {
 
     @PutMapping("/sysuser")//动态修改人员信息，可修改部分或全部属性版
     public Result update(@RequestBody Sysuser sysuser){
-        log.info("执行控制-update方法-修改人员");
+        log.info("执行控制-update方法-修改员工信息");
         sysuserService.updateSysuser(sysuser);
         return Result.success();
     }
@@ -70,7 +70,7 @@ public class SysuserController {
     public Result getQueryPage(@RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer pageSize,
                                String name, Short gender, Short status, @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDateTime begin, @DateTimeFormat(pattern = "yyyy-MM-dd")LocalDateTime end){
         /*@DateTimeFormat(pattern = "yyyy-MM-dd")此注解表示接收的前端日期时间的格式*/
-        log.info("控制-getQueryPage-条件 分页查询");
+        log.info("控制-getQueryPage-条件 条件查询 分页返回");
         PageBean pageBean = sysuserService.getQueryPage(page,pageSize,name,gender,status,begin,end);
         return Result.success(pageBean);
     }
