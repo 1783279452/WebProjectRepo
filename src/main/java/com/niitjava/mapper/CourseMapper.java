@@ -22,4 +22,10 @@ public interface CourseMapper {
 
     @Select("select id, course_name courseName, term from course")
     List<Course> getCourse();
+
+    @Select("select course_name courseName from course where id = #{id}")
+    String getNameById(Integer id);
+
+    @Select("select term from course where id = #{id}")
+    String getTermById(Integer id);
 }

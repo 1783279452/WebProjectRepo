@@ -48,6 +48,4 @@ public class ClassController {
         return Result.success();
     }
 
-
-
 }

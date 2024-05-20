@@ -3,6 +3,7 @@ package com.niitjava.controller;
 
 import com.niitjava.Bean.Course;
 import com.niitjava.Bean.Result;
+import com.niitjava.aop.Log;
 import com.niitjava.service.CourseService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.annotations.Delete;

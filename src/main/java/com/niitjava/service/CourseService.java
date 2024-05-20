@@ -1,6 +1,7 @@
 package com.niitjava.service;
 
 import com.niitjava.Bean.Course;
+import com.niitjava.Bean.Score;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,4 +16,6 @@ public interface CourseService {
     void updateCourse(Course course);
 
     List<Course> getCourse();
+     String getNameById(Integer id);
+     String getTermById(Integer id);
 }
