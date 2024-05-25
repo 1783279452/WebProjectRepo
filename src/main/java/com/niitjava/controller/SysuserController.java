@@ -17,7 +17,7 @@ import java.util.List;
 @Slf4j
 public class SysuserController {
 
-    @Autowired
+    @Autowired//依赖注入
     private SysuserService sysuserService;
 
 

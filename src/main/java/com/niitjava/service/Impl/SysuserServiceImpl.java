@@ -3,6 +3,7 @@ package com.niitjava.service.Impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.niitjava.Bean.PageBean;
+import com.niitjava.Bean.Result;
 import com.niitjava.Bean.Sysuser;
 import com.niitjava.mapper.SysuserMapper;
 import com.niitjava.service.SysuserService;
@@ -69,6 +70,31 @@ public class SysuserServiceImpl implements SysuserService {
     @Override//登录校验
     public Sysuser login(Sysuser sysuser) {
         return sysuserMapper.login(sysuser);
+    }
+
+    @Override
+    public Boolean isPasswordNull(String password) {//判断密码是否为空
+        if (password == null | password == ""){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isUsernameNull(String username) {//判断账号是否为空
+        if (username == null | username == ""){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isUsername(String username) {//判断账号是否已经存在
+        int num = sysuserMapper.isUsername(username);
+        if (num >= 1){
+            return true;
+        }
+        return false;
     }
 
 

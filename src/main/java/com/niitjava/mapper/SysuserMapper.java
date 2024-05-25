@@ -24,9 +24,10 @@ public interface SysuserMapper {
 
     void update(Sysuser sysuser);//动态sql语句交由Xml文件进行管理
 
-    @Select("select * from sysuser where id = #{id}")
+    @Select("select id, username, password, name, image, gender, status, entrydate, create_time createTime, update_time updateTime from sysuser where id = #{id}")//根据ID查询员工信息
     Sysuser getSysuById(Integer id);
 
+    //TODO
     @Select("select * from sysuser")//分页查询（插件版）
     List<Sysuser> getPage();
 
@@ -35,6 +36,9 @@ public interface SysuserMapper {
     List<Sysuser> getQueryPage(String name, Short gender, Short status, LocalDateTime begin, LocalDateTime end);
 
 
-    @Select("select * from sysuser where username = #{username} and password = #{password}")//登录 查询账号密码是否正确
+    @Select("select username , password from sysuser where username = #{username} and password = #{password}")//登录 查询账号密码是否正确
     Sysuser login(Sysuser sysuser);
+
+    @Select("select count(*) from sysuser where username = #{username}")//判断账号是否已经存在
+    int isUsername(String username);
 }

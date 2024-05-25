@@ -21,6 +21,7 @@ public interface StudentMapper {
 
     @Select("select id, sn, name, image, gender, status, class_name className, class_id classId, entrydate, create_time createTime, update_time updateTime from student")
     List<Student> getAllStudent();
+    //TODO
 
     @Select("select * from student where id = #{id}")
     Student getStudentById(Integer id);

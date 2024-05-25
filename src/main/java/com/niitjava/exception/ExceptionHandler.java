@@ -26,7 +26,7 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(Exception.class)
     public Result hand(Exception e){
         e.printStackTrace();//打印异常的堆栈信息
-        log.info("——————捕获到全局异常——————");
+        log.error("——————捕获到全局异常——————");
         return Result.error("失败，操作出现异常错误，请联系管理员");
     }
 

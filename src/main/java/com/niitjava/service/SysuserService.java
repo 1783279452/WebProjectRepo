@@ -1,6 +1,7 @@
 package com.niitjava.service;
 
 import com.niitjava.Bean.PageBean;
+import com.niitjava.Bean.Result;
 import com.niitjava.Bean.Sysuser;
 import org.springframework.stereotype.Service;
 
@@ -25,4 +26,11 @@ public interface SysuserService {
     PageBean getQueryPage(Integer page, Integer pageSize, String name, Short gender, Short status, LocalDateTime begin, LocalDateTime end);
 
     Sysuser login(Sysuser sysuser);
+
+    Boolean isPasswordNull(String password);
+
+    boolean isUsernameNull(String username);
+
+    boolean isUsername(String username);
+
 }
