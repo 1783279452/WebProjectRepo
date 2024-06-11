@@ -12,7 +12,7 @@ import java.util.List;
 public interface SysuserService {
     List<Sysuser> getSysuser();
 
-    void addSysuser(Sysuser sysuser);
+    Result addSysuser(Sysuser sysuser);
 
     void deleteSysuser(Integer id);
 

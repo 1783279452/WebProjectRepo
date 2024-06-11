@@ -18,8 +18,8 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @PostMapping("/stu")
-    public Result add(@RequestBody Student student){//添加学生
+    @PostMapping("/stu")//添加学生
+    public Result add(@RequestBody Student student){
         log.info("执行控制-add方法-添加学生：" +student);
         studentService.addstudent(student);
         return Result.success();
@@ -32,8 +32,8 @@ public class StudentController {
         return Result.success();
     }
 
-    @GetMapping("/stu")
-    public Result get(){//查询全部学生
+    @GetMapping("/stu")//查询全部学生
+    public Result get(){
         log.info("执行控制-get方法-查询全部学生信息");
         List<Student> list = studentService.getSysuser();
         return Result.success(list);//向前端返回

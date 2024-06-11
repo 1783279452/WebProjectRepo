@@ -10,6 +10,8 @@ import com.niitjava.service.SysuserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.DigestUtils;
+
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -26,10 +28,27 @@ public class SysuserServiceImpl implements SysuserService {
     }
 
     @Override//添加人员
-    public void addSysuser(Sysuser sysuser) {
+    public Result addSysuser(Sysuser sysuser) {
+        if (isUsernameNull(sysuser.getUsername())){
+            return Result.error("账号为空，请重新输入");
+        }
+        if (isPasswordNull(sysuser.getPassword())){
+            return Result.error("密码为空，请重新输入");
+        }
+        if (sysuser.getUsername().length() < 4 ){
+            return Result.error("账号小于4位数，请重新输入");
+        }
+        if (sysuser.getPassword().length() <6 ){
+            return Result.error("密码小于6位数，请重新输入");
+        }
+        if (isUsername(sysuser.getUsername())){
+            return Result.error("账号已存在，请重新输入");
+        }
+        sysuser.setPassword(DigestUtils.md5DigestAsHex(sysuser.getPassword().getBytes()));//密码md5加密
         sysuser.setCreateTime(LocalDateTime.now());
         sysuser.setUpdateTime(LocalDateTime.now());
         sysuserMapper.addSysuser(sysuser);
+        return Result.success();
     }
 
     @Override//根据ID删除人员
@@ -69,6 +88,10 @@ public class SysuserServiceImpl implements SysuserService {
 
     @Override//登录校验
     public Sysuser login(Sysuser sysuser) {
+        /*对前端传来的密码进行md5加密 再查询*/
+        String password = sysuser.getPassword();
+        password = DigestUtils.md5DigestAsHex(password.getBytes());//spring提供的工具类DigestUtils
+        sysuser.setPassword(password);
         return sysuserMapper.login(sysuser);
     }
 

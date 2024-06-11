@@ -31,8 +31,7 @@ public class SysuserController {
     @PostMapping("/sysuser")//添加系统人员信息
     public Result add(@RequestBody Sysuser sysuser){//添加系统人员信息——接受前端返回的json信息并封装成bean类
         log.info("执行控制-add方法-添加系统人员");
-        sysuserService.addSysuser(sysuser);
-        return Result.success();
+        return sysuserService.addSysuser(sysuser);
     }
 
     @DeleteMapping("/sysuser/{id}")//删除人员  通过前端返回id删除

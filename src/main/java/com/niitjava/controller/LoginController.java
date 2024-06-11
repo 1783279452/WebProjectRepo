@@ -23,24 +23,23 @@ public class LoginController {
     @PostMapping("/signup")//注册功能
     public Result signUp(@RequestBody Sysuser sysuser){
         log.info("控制-注册账号");
-        if (sysuserService.isUsernameNull(sysuser.getUsername())){
-            return Result.error("账号为空，请重新输入");
-        }
-        if (sysuserService.isPasswordNull(sysuser.getPassword())){
-            return Result.error("密码为空，请重新输入");
-        }
-        if (sysuser.getUsername().length() < 4 ){
-            return Result.error("账号小于4位数，请重新输入");
-        }
-        if (sysuser.getPassword().length() <6 ){
-            return Result.error("密码小于6位数，请重新输入");
-        }
-        if (sysuserService.isUsername(sysuser.getUsername())){
-            return Result.error("账号已存在，请重新输入");
-        }
-        sysuser.setPassword(DigestUtils.md5DigestAsHex(sysuser.getPassword().getBytes()));//密码md5加密
-        sysuserService.addSysuser(sysuser);//同在管理员端内增加账号
-        return Result.success();
+//        if (sysuserService.isUsernameNull(sysuser.getUsername())){
+//            return Result.error("账号为空，请重新输入");
+//        }
+//        if (sysuserService.isPasswordNull(sysuser.getPassword())){
+//            return Result.error("密码为空，请重新输入");
+//        }
+//        if (sysuser.getUsername().length() < 4 ){
+//            return Result.error("账号小于4位数，请重新输入");
+//        }
+//        if (sysuser.getPassword().length() <6 ){
+//            return Result.error("密码小于6位数，请重新输入");
+//        }
+//        if (sysuserService.isUsername(sysuser.getUsername())){
+//            return Result.error("账号已存在，请重新输入");
+//        }
+//        sysuser.setPassword(DigestUtils.md5DigestAsHex(sysuser.getPassword().getBytes()));//密码md5加密
+        return sysuserService.addSysuser(sysuser);//同在管理员端内增加账号
     }
 
     @PostMapping("/login")//接收前端json格式账号密码
@@ -58,10 +57,10 @@ public class LoginController {
         if (sysuser.getPassword().length() <6 ){
             return Result.error("密码小于6位数，请重新输入");
         }
-        /*对前端传来的密码进行md5加密 再查询*/
-        String password = sysuser.getPassword();
-        password = DigestUtils.md5DigestAsHex(password.getBytes());//spring提供的工具类DigestUtils
-        sysuser.setPassword(password);
+//        /*对前端传来的密码进行md5加密 再查询*/
+//        String password = sysuser.getPassword();
+//        password = DigestUtils.md5DigestAsHex(password.getBytes());//spring提供的工具类DigestUtils
+//        sysuser.setPassword(password);
 
         Sysuser sysuser1 = sysuserService.login(sysuser);//查询
 
