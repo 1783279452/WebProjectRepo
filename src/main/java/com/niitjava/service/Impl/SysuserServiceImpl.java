@@ -29,9 +29,6 @@ public class SysuserServiceImpl implements SysuserService {
 
     @Override//添加人员
     public Result addSysuser(Sysuser sysuser) {
-        if (isUsernameNull(sysuser.getUsername())){
-            return Result.error("账号为空，请重新输入");
-        }
         if (isPasswordNull(sysuser.getPassword())){
             return Result.error("密码为空，请重新输入");
         }
